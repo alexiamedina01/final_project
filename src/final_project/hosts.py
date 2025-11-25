@@ -1,8 +1,10 @@
 # src/final_project/hosts.py
 
+from .place import Place
+
 # create the host class
 class Host:
-    def __init__(self, host_id, place, city):
+    def __init__(self, host_id:int, place:Place, city):
         self.host_id = host_id
         self.city = city
         self.area = place.area
@@ -26,8 +28,8 @@ class Host:
 
         bids = []
         for pid in opportunities:
-            place = self.city.places[pid]
-            ask_price = list(place.price.values())[-1]
+            place:Place = self.city.places[pid]
+            ask_price = place.get_last_sale_price()
 
             if self.profits >= ask_price:
                 bids.append({

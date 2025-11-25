@@ -6,14 +6,14 @@ from .hosts import Host
 import random
 
 class City:
-    def __init__(self, size, area_rates):
+    def __init__(self, size:int, area_rates:dict):
         self.size = size
         self.area_rates = area_rates
         self.step = 0
 
     def initialize(self):
         # create places
-        self.places = []
+        self.places:list[Place] = []
         for i in range(self.size * self.size):
             p = Place(i, i, self)    # host inicial = place_id
             self.places.append(p)
@@ -23,7 +23,7 @@ class City:
             p.setup()
 
         # hosts
-        self.hosts = []
+        self.hosts:list[Host] = []
         for p in self.places:
             h = Host(p.host_id, p, self)
             self.hosts.append(h)
@@ -93,3 +93,18 @@ class City:
         for h in self.hosts:
             h.update_profits()
         return self.clear_market()
+    
+    # Returns the Place instance with that id, inside the city palces list
+    def get_place(self, place_id:int):
+        for place in self.places:
+            if place.place_id == place_id:
+                return place
+        # We will never reach this point if we use the city places ids
+        return None
+
+
+
+
+
+
+

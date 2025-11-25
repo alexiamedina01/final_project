@@ -1,7 +1,7 @@
 import random
 
 class Place:
-    def __init__(self, place_id, host_id, city):
+    def __init__(self, place_id:int, host_id:int, city):
         self.place_id = place_id
         self.host_id = host_id
         self.city = city
@@ -37,3 +37,6 @@ class Place:
             self.occupancy = random.randint(5, 15)
         else:
             self.occupancy = random.randint(10, 20)
+
+    def get_last_sale_price(self):
+        return list(self.price.values())[-1]
